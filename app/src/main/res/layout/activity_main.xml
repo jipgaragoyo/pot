@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <!-- 년도와 월 -->
+    <TextView
+        android:id="@+id/monthYearTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:padding="16dp"
+        android:layout_marginTop="12dp"/>
+
+    <!-- 이전 달 버튼 -->
+    <ImageButton
+        android:id="@+id/prevMonthBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/monthYearTextView"
+        android:src="@drawable/left"
+        android:background="@null"
+        android:padding="8dp"
+        android:contentDescription="Previous Month"/>
+
+    <!-- 다음 달 버튼 -->
+    <ImageButton
+        android:id="@+id/nextMonthBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/monthYearTextView"
+        android:src="@drawable/right"
+        android:background="@null"
+        android:padding="8dp"
+        android:contentDescription="Next Month"/>
+
+    <!-- 현재 날짜로 돌아가기 버튼 -->
+    <TextView
+        android:id="@+id/todayButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/today_button_background"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:text=""/>
+
+    <!-- 요일 표시 -->
+    <LinearLayout
+        android:id="@+id/weekDaysLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/prevMonthBtn"
+        android:gravity="center"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="일"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_red_light"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="월"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="화"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="수"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="목"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="금"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="토"
+            android:textAlignment="center"/>
+    </LinearLayout>
+
+    <!-- 달력 그리드뷰 -->
+    <GridView
+        android:id="@+id/calendarGridView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/weekDaysLayout"
+        android:numColumns="7"
+        android:padding="0dp"
+        android:verticalSpacing="0dp"
+        android:horizontalSpacing="0dp"
+        android:layout_margin="0dp"/>
+
+    <!-- 메뉴 바 상단의 회색 선 -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#858585"
+        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/menuBar" />
+
+    <!-- 메뉴 바 -->
+    <LinearLayout
+        android:id="@+id/menuBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="20dp">
+
+        <!-- 달력 메뉴 아이콘 -->
+        <android.widget.Button
+            android:id="@+id/calendarMenuButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:text="1"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:layout_gravity="center"/>
+
+        <!-- 투두리스트 메뉴 아이콘 -->
+        <android.widget.Button
+            android:id="@+id/todoListMenuButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:text="2"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:layout_gravity="center"/>
+
+        <!-- 마이페이지 메뉴 아이콘 -->
+        <android.widget.Button
+            android:id="@+id/myPageMenuButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:text="3"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+</RelativeLayout>

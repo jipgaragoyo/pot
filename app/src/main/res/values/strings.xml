@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">PhotoThis</string>
+    <string name="diary_image_description">Diary Image</string>
+    <string name="menu_button_desc">Menu</string>
+</resources>

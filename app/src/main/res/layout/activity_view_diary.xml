@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <!-- Back Button (added) -->
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/left"
+
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:padding="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Menu Button (always visible at the top) -->
+    <ImageButton
+        android:id="@+id/menuButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/menu"
+        android:contentDescription="@string/menu_button_desc"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:padding="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Slide Menu (initially hidden) -->
+    <LinearLayout
+        android:id="@+id/menuLayout"
+        android:layout_width="130dp"
+        android:layout_height="120dp"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:background="@drawable/rounded_background"
+        android:elevation="8dp"
+        android:padding="5dp"
+        android:layout_below="@id/menuButton"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="8dp">
+
+        <Button
+            android:id="@+id/editButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="수정"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/black" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"/>
+
+        <Button
+            android:id="@+id/deleteButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="삭제"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+
+    <!-- Diary ImageView -->
+    <ImageView
+        android:id="@+id/diaryImageView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:contentDescription="@string/diary_image_description"
+        android:scaleType="centerCrop"
+        android:visibility="visible"
+        android:layout_below="@id/menuButton"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Diary TextView -->
+    <TextView
+        android:id="@+id/diaryTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/diaryImageView"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:background="@drawable/edit_text_background"
+        android:scrollbars="vertical"/>
+</RelativeLayout>
