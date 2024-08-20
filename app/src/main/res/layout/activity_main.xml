@@ -129,9 +129,8 @@
     <!-- 메뉴 바 상단의 회색 선 -->
     <View
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="#858585"
-        android:layout_alignParentBottom="true"
+        android:layout_height="2dp"
+        android:background="#C1C1C1"
         android:layout_above="@+id/menuBar" />
 
     <!-- 메뉴 바 -->
@@ -145,8 +144,8 @@
         android:gravity="center"
         android:paddingTop="4dp"
         android:paddingBottom="4dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="20dp">
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp">
 
         <!-- 달력 메뉴 아이콘 -->
         <android.widget.Button
