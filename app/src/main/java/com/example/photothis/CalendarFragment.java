@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
+// 날짜칸에 이미지 띄우는 거
 public class CalendarFragment extends Fragment {
 
     private GridView gridView;

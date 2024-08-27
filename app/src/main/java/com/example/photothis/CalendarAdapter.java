@@ -13,6 +13,7 @@ import com.squareup.picasso.Picasso;
 import java.util.HashMap;
 import java.util.List;
 
+// 날짜칸 코드
 public class CalendarAdapter extends BaseAdapter {
 
     private Context context;

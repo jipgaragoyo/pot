@@ -30,6 +30,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
+// 메인페이지 ( 달력 나오는 것 )
 public class MainActivity extends AppCompatActivity {
 
     private TextView monthYearTextView;
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         daysInMonth = new ArrayList<>();
         updateCalendar();
 
+//        이전 달 버튼
         findViewById(R.id.prevMonthBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+//        다음 달 버튼
         findViewById(R.id.nextMonthBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+//        상단에 년/월 버튼 누르면 날짜피커나옴
         findViewById(R.id.monthYearTextView).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+//        현재 날짜로 돌아가는 버튼
         findViewById(R.id.todayButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+//    날짜피커 설정
     private void showDatePickerDialog() {
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.number_picker_popup, null);
@@ -184,6 +190,7 @@ public class MainActivity extends AppCompatActivity {
         datePickerDialog.show();
     }
 
+//    선택한 날짜칸에 일기 데이터가 있으면 일기 보는 페이지, 없으면 쓰는 페이지로 이동
     private void checkDiaryExist(final String selectedDate) {
         diaryRef.orderByChild("date").equalTo(selectedDate).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

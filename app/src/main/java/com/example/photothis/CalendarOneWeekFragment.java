@@ -38,7 +38,7 @@ public class CalendarOneWeekFragment extends Fragment {
     private static final String PREF_SELECTED_DATE = "SELECTED-DATE";
 
     private static final int COLOR_TODAY = R.color.Jblue; // 오늘 날짜 강조 색상
-    private static final int COLOR_SELECTED_DATE = R.color.purple; // 선택된 날짜 강조 색상
+    private static final int COLOR_SELECTED_DATE = R.color.blue; // 선택된 날짜 강조 색상
     private static final int COLOR_DEFAULT = R.color.transparent; // 기본 상태 색상
 
     @Nullable

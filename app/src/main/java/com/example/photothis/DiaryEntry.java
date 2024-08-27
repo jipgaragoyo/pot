@@ -1,5 +1,6 @@
 package com.example.photothis;
 
+// 파이어베이스 일기 데이터 저장 형식
 public class DiaryEntry {
     private String id;
     private String date;

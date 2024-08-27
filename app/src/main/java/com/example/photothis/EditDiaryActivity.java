@@ -55,8 +55,7 @@ import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 
-
-
+// 일기 수정 페이지 (일기 쓰기 페이지와 비슷 )
 public class EditDiaryActivity extends AppCompatActivity {
 
     private EditText diaryEditText;

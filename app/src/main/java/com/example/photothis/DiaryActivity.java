@@ -9,6 +9,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+// 날짜칸 데이터 업데이트
 public class DiaryActivity extends AppCompatActivity {
 
     private GridView calendarGridView;

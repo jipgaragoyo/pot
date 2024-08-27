@@ -1,17 +1,17 @@
 package com.example.photothis;
 
-import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
-
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.photothis.databinding.ActivityTodoListBinding;
 import com.example.photothis.databinding.ActivityTodoListBinding;
 
 import java.time.LocalDate;
@@ -50,6 +50,9 @@ public class TodoListActivity extends AppCompatActivity implements IDateClickLis
         dbManager.setSelectedDate(selectedDate); // 선택된 날짜 설정
         dbManager.loadTasks(); // 초기 작업 로딩
 
+        // 날짜 표시 초기화
+        updateSelectedDateDisplay(); // 현재 날짜로 상단 텍스트 업데이트
+
         binding.addButton.setOnClickListener(v -> showTaskDialog());
 
         // TaskDialogFragment와 PopupDialogFragment의 결과를 처리합니다.
@@ -72,10 +75,6 @@ public class TodoListActivity extends AppCompatActivity implements IDateClickLis
             String taskId = result.getString("taskId"); // taskId를 String으로 가져옴
             boolean isDeleted = result.getBoolean("isDeleted", false); // 기본값 false
 
-            if (taskId == null || taskId.isEmpty()) {
-                Log.e(TAG, "Cannot update or delete task: Task ID is null or empty.");
-                return;
-            }
 
             if (isDeleted) {
                 // 삭제 작업
@@ -91,8 +90,29 @@ public class TodoListActivity extends AppCompatActivity implements IDateClickLis
                 dbManager.updateTask(taskId, updatedTask); // Update using ID
             }
         });
+
         setOneWeekViewPager();
-        updateSelectedDateDisplay();
+
+        // 메뉴 바 버튼 클릭 이벤트 설정
+        Button calendarButton = findViewById(R.id.calendarButton);
+        Button todoListButton = findViewById(R.id.todoListButton);
+        Button myPageButton = findViewById(R.id.myPageButton);
+
+        calendarButton.setOnClickListener(v -> {
+            Intent intent = new Intent(TodoListActivity.this, MainActivity.class);
+            startActivity(intent);
+        });
+
+        todoListButton.setOnClickListener(v -> {
+            Intent intent = new Intent(TodoListActivity.this, TodoListActivity.class);
+            startActivity(intent);
+        });
+
+        myPageButton.setOnClickListener(v -> {
+            Intent intent = new Intent(TodoListActivity.this, MyPageActivity.class);
+            startActivity(intent);
+        });
+
     }
 
     private void showTaskDialog() {
@@ -100,9 +120,6 @@ public class TodoListActivity extends AppCompatActivity implements IDateClickLis
         Bundle args = new Bundle();
         args.putString(TaskDialogFragment.KEY_DATE, selectedDate.toString());
         dialog.setArguments(args);
-
-        // 여기에서 setOnDismissListener를 제거
-        // 대신 TaskDialogFragment에서 onDismiss 메서드를 사용하여 다이얼로그가 닫힐 때 필요한 작업을 처리하도록 합니다.
 
         dialog.show(getSupportFragmentManager(), "TaskDialog");
     }
