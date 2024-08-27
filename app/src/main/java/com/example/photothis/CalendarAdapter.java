@@ -13,6 +13,7 @@ import com.squareup.picasso.Picasso;
 import java.util.HashMap;
 import java.util.List;
 
+// 달력 날짜칸
 public class CalendarAdapter extends BaseAdapter {
 
     private Context context;
@@ -68,6 +69,7 @@ public class CalendarAdapter extends BaseAdapter {
                         .into(imageView);
                 imageView.setVisibility(View.VISIBLE);
                 // 이미지가 보일 때 텍스트를 숨깁니다.
+//                텍스트 위에 이미지가 올라오게 하면 계속 오류가 나서 글자가 투명해진 후 이미지가 나오게 함
                 dayTextView.setVisibility(View.GONE);
             } else {
                 imageView.setVisibility(View.GONE);

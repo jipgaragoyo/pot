@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <!-- Back Button (added) -->
+    <!-- 뒤로가기 버튼 - 왼쪽 상단 -->
     <ImageButton
         android:id="@+id/backButton"
         android:layout_width="wrap_content"
@@ -18,7 +18,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"/>
 
-    <!-- Menu Button (always visible at the top) -->
+    <!-- 메뉴 버튼 - 오른쪽 상단 -->
     <ImageButton
         android:id="@+id/menuButton"
         android:layout_width="wrap_content"
@@ -32,7 +32,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"/>
 
-    <!-- Slide Menu (initially hidden) -->
+    <!-- 메뉴 레이아웃 - 메뉴 누르면 나타남 -->
     <LinearLayout
         android:id="@+id/menuLayout"
         android:layout_width="130dp"
@@ -70,7 +70,7 @@
             android:textColor="@android:color/black" />
     </LinearLayout>
 
-    <!-- Diary ImageView -->
+    <!-- 일기 이미지 -->
     <ImageView
         android:id="@+id/diaryImageView"
         android:layout_width="match_parent"
@@ -81,7 +81,7 @@
         android:layout_below="@id/menuButton"
         android:layout_marginTop="8dp"/>
 
-    <!-- Diary TextView -->
+    <!-- 일기 텍스트 -->
     <TextView
         android:id="@+id/diaryTextView"
         android:layout_width="match_parent"

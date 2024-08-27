@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+<!--    임시 코드!!!!!! 나중에 수정 / 삭제  -->
     <!-- 투두리스트와 관련된 UI 요소들 -->
     <TextView
         android:id="@+id/todoListTitle"

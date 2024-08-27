@@ -30,6 +30,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
+// 메인 ( 달력 있는 화면 )
 public class MainActivity extends AppCompatActivity {
 
     private TextView monthYearTextView;
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         daysInMonth = new ArrayList<>();
         updateCalendar();
 
+//        이전달 버튼
         findViewById(R.id.prevMonthBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+//        다음달 버튼
         findViewById(R.id.nextMonthBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+//        년도/월 버튼 ( 누르면 날짜피커 나옴 )
         findViewById(R.id.monthYearTextView).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+//        오늘 날짜로 이동하는 버튼 (오른쪽 상단 네모박스)
         findViewById(R.id.todayButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+//        날짜칸 클릭했을 때 일기 존재확인, 선택한 날짜 yyyy-mm-dd 형식으로 변환
         calendarGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -112,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+//        투두리스트 버튼 ( 임시로 만든 거라 나중에 수정/삭제 )
         todoListMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+//        마이페이지 버튼 ( 임시라 나중에 수정/삭제 )
         myPageMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+//    날짜피커 ( 년 / 월 / 일 순으로 스크롤해서 날짜 선택 )
     private void showDatePickerDialog() {
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.number_picker_popup, null);
@@ -144,14 +153,17 @@ public class MainActivity extends AppCompatActivity {
         int currentMonth = now.get(Calendar.MONTH) + 1;
         int currentDay = now.get(Calendar.DAY_OF_MONTH);
 
+//        년도 선택 최소/최대값 설정
         yearPicker.setMinValue(currentYear - 100);
         yearPicker.setMaxValue(currentYear + 100);
         yearPicker.setValue(currentYear);
 
+//        월 선택 설정
         monthPicker.setMinValue(1);
         monthPicker.setMaxValue(12);
         monthPicker.setValue(currentMonth);
 
+//        날짜 선택 설정
         dayPicker.setMinValue(1);
         dayPicker.setMaxValue(now.getActualMaximum(Calendar.DAY_OF_MONTH));
         dayPicker.setValue(currentDay);
@@ -160,6 +172,7 @@ public class MainActivity extends AppCompatActivity {
         builder.setView(dialogView);
         final AlertDialog datePickerDialog = builder.create();
 
+//        취소 버튼
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -167,6 +180,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+//        선택 버튼 ( 누르면 선택된 달로 이동 )
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -184,6 +198,7 @@ public class MainActivity extends AppCompatActivity {
         datePickerDialog.show();
     }
 
+//    날짜칸 데이터 유/무 확인, 유 - 일기 보기, 무 - 일기 쓰기
     private void checkDiaryExist(final String selectedDate) {
         diaryRef.orderByChild("date").equalTo(selectedDate).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -206,6 +221,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+//    달력 업데이트 ( 달력에 해당 달의 날짜만 나오게 하기 위해... )
+//    달을 이동하거나 특정 날짜로 이동할 때 달력의 날짜, 이미지 새로 설정 / 화면 갱신하는 코드
     private void updateCalendar() {
         daysInMonth.clear();
         Calendar tempCalendar = (Calendar) calendar.clone();
@@ -237,6 +254,8 @@ public class MainActivity extends AppCompatActivity {
         todayButton.setText(dayFormat.format(Calendar.getInstance(Locale.KOREA).getTime()));
     }
 
+//    파이어베이스에서 일기 이미지 불러와서 띄우는 코드
+//    현재 달에 해당하는 일기 이미지 불러와 CalendarAdapter에 전달
     private void fetchDiaryImages() {
         diaryRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

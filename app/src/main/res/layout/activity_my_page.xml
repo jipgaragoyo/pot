@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+<!-- 임시코드!!!!!!!!! 나중에 수정 / 삭제-->
     <!-- 마이페이지와 관련된 UI 요소들 -->
     <TextView
         android:id="@+id/myPageTitle"

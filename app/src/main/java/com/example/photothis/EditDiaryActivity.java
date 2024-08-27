@@ -55,8 +55,7 @@ import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 
-
-
+// 일기 수정 페이지 ( 일기 쓰기 페이지와 거의 동일 )
 public class EditDiaryActivity extends AppCompatActivity {
 
     private EditText diaryEditText;
@@ -127,6 +126,7 @@ public class EditDiaryActivity extends AppCompatActivity {
         });
     }
 
+//    기존 일기 내용 불러옴
     private void loadDiaryEntry() {
         diaryRef.orderByChild("date").equalTo(selectedDate).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -180,6 +180,7 @@ public class EditDiaryActivity extends AppCompatActivity {
         }
     }
 
+//    저장 버튼, 이미지 또는 내용이 없으면 저장 불가능
     private void saveDiaryEntry() {
         String newText = diaryEditText.getText().toString().trim();
 
@@ -204,6 +205,7 @@ public class EditDiaryActivity extends AppCompatActivity {
         }
     }
 
+//    다이어리 저장 후 업데이트, 메시지 띄움
     private void updateDiaryEntry(String text, String imageUrl) {
         diaryRef.orderByChild("date").equalTo(selectedDate).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+// 임시코드라 나중에 수정/삭제 - 투두리스트
 public class TodoListActivity extends AppCompatActivity {
 
     @Override
