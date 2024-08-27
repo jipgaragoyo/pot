@@ -1,8 +1,5 @@
 package com.example.photothis;
 
-// 일기 데이터 기본 구조, 파이어베이스 데이터 전송 및 수신 코드
-// ID는 랜덤생성, date는 yyyy-mm-dd 형식, text는 일기 내용, imageUrlsms 일기 이미지
-// 파이어베이스에 이런 식으로 저장됨
 public class DiaryEntry {
     private String id;
     private String date;

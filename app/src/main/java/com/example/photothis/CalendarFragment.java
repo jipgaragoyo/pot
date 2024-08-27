@@ -24,7 +24,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-// 파이어베이스에서 일기 이미지를 불러와 날짜칸에 표시
 public class CalendarFragment extends Fragment {
 
     private GridView gridView;
@@ -43,7 +42,7 @@ public class CalendarFragment extends Fragment {
         diaryImages = new HashMap<>();
         calendar = Calendar.getInstance(Locale.KOREA);
 
-        // 객체 초기화
+        // Initialize CalendarAdapter
         String currentYearMonth = getCurrentYearMonth();
         calendarAdapter = new CalendarAdapter(getContext(), getDaysInMonth(), currentYearMonth);
         gridView.setAdapter(calendarAdapter);

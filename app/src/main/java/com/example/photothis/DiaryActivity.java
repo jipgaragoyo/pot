@@ -9,7 +9,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-// 일기, 달력 기능 구현 코드
 public class DiaryActivity extends AppCompatActivity {
 
     private GridView calendarGridView;
@@ -29,7 +28,6 @@ public class DiaryActivity extends AppCompatActivity {
         updateCalendar();
     }
 
-//    달력 데이터 준비, 현재 달 날짜를 계산해  CalendarAdapter를 통해 GridView에 표시
     private void updateCalendar() {
         daysInMonth.clear();
         Calendar tempCalendar = (Calendar) calendar.clone();
