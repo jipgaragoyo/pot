@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp">
+
+    <!-- 사진을 위한 ImageView -->
+    <ImageView
+        android:id="@+id/diaryImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/diary_image_description"
+        android:visibility="gone"
+        android:scaleType="centerCrop"/>
+
+    <!-- 날짜를 표시하는 TextView -->
+    <TextView
+        android:id="@+id/dayTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="14sp"
+        android:textColor="@android:color/black"
+        android:background="@android:color/transparent"/> <!-- 투명 배경으로 설정 -->
+</FrameLayout>

@@ -22,25 +22,20 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import android.text.method.ScrollingMovementMethod;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
-
-//일기 보는 페이지
 public class ViewDiaryActivity extends AppCompatActivity {
 
     private TextView diaryTextView;
     private ImageView diaryImageView;
     private LinearLayout menuLayout;
     private ImageButton menuButton;
-    private ImageButton backButton;
+    private ImageButton backButton; // Add this member variable for back button
     private Button editButton;
     private Button deleteButton;
 
     private DatabaseReference diaryRef;
-    private StorageReference storageRef; // Firebase Storage reference
     private String selectedDate;
-    private DiaryEntry currentEntry;
+    private DiaryEntry currentEntry; // Add this member variable to store the DiaryEntry
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,14 +46,14 @@ public class ViewDiaryActivity extends AppCompatActivity {
         diaryImageView = findViewById(R.id.diaryImageView);
         menuLayout = findViewById(R.id.menuLayout);
         menuButton = findViewById(R.id.menuButton);
-        backButton = findViewById(R.id.backButton);
+        backButton = findViewById(R.id.backButton); // Initialize back button
         editButton = findViewById(R.id.editButton);
         deleteButton = findViewById(R.id.deleteButton);
 
+        // Set movement method for scrolling
         diaryTextView.setMovementMethod(new ScrollingMovementMethod());
 
         diaryRef = FirebaseDatabase.getInstance().getReference().child("diary_entries");
-        storageRef = FirebaseStorage.getInstance().getReference(); // Initialize Firebase Storage reference
 
         selectedDate = getIntent().getStringExtra("selected_date");
 
@@ -70,6 +65,7 @@ public class ViewDiaryActivity extends AppCompatActivity {
 
         loadDiaryEntry();
 
+        // Menu button click event
         menuButton.setOnClickListener(v -> {
             if (menuLayout.getVisibility() == View.GONE) {
                 menuLayout.setVisibility(View.VISIBLE);
@@ -78,20 +74,24 @@ public class ViewDiaryActivity extends AppCompatActivity {
             }
         });
 
+        // Back button click event
         backButton.setOnClickListener(v -> {
             Intent intent = new Intent(ViewDiaryActivity.this, MainActivity.class);
             startActivity(intent);
-            finish();
+            finish(); // Close current activity
         });
 
+        // Edit button click event
         editButton.setOnClickListener(v -> {
             Intent intent = new Intent(ViewDiaryActivity.this, EditDiaryActivity.class);
             intent.putExtra("selected_date", selectedDate);
             startActivity(intent);
         });
-// 삭제 버튼 누르면 팝업창 나옴
+
+        // Delete button click event
         deleteButton.setOnClickListener(v -> showDeleteConfirmationDialog());
 
+        // Image click event
         diaryImageView.setOnClickListener(v -> showImageDialog());
     }
 
@@ -139,7 +139,7 @@ public class ViewDiaryActivity extends AppCompatActivity {
             }
         });
     }
-// 삭제 팝업
+
     private void showDeleteConfirmationDialog() {
         new android.app.AlertDialog.Builder(this)
                 .setTitle("삭제 확인")
@@ -154,22 +154,15 @@ public class ViewDiaryActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    currentEntry = snapshot.getValue(DiaryEntry.class);
-                    if (currentEntry != null) {
-                        String imageUrl = currentEntry.getImageUrl();
-                        if (imageUrl != null && !imageUrl.isEmpty()) {
-                            StorageReference imageRef = storageRef.child(imageUrl);
-                            imageRef.delete().addOnCompleteListener(task -> {
-                                if (task.isSuccessful()) {
-                                    deleteDiaryFromDatabase(snapshot);
-                                } else {
-                                    Toast.makeText(ViewDiaryActivity.this, "이미지 삭제 실패 V07: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                    snapshot.getRef().removeValue().addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(ViewDiaryActivity.this, "다이어리가 삭제되었습니다. V04", Toast.LENGTH_SHORT).show();
+                            updateChartData(); // 일기 삭제 후 차트를 업데이트
+                            finish(); // Close the activity after deletion
                         } else {
-                            deleteDiaryFromDatabase(snapshot);
+                            Toast.makeText(ViewDiaryActivity.this, "다이어리 삭제에 실패했습니다. V05", Toast.LENGTH_SHORT).show();
                         }
-                    }
+                    });
                 }
             }
 
@@ -180,16 +173,30 @@ public class ViewDiaryActivity extends AppCompatActivity {
         });
     }
 
-    private void deleteDiaryFromDatabase(DataSnapshot snapshot) {
-        snapshot.getRef().removeValue().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                Toast.makeText(ViewDiaryActivity.this, "다이어리가 삭제되었습니다. V04", Toast.LENGTH_SHORT).show();
-                finish(); // Close the activity after deletion
-            } else {
-                Toast.makeText(ViewDiaryActivity.this, "다이어리 삭제에 실패했습니다. V05", Toast.LENGTH_SHORT).show();
+    // 차트 데이터를 다시 로드하는 메서드
+    private void updateChartData() {
+        // Firebase에서 데이터를 다시 읽어와 차트에 반영하는 로직 추가
+        // 예시: Firebase 데이터 다시 로드
+        FirebaseDatabase.getInstance().getReference().child("diary_entries").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                // 새로 로드된 데이터를 기반으로 차트 업데이트
+                updateChartWithNewData(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(ViewDiaryActivity.this, "차트 업데이트 실패: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
+
+    // Firebase 데이터를 사용하여 차트를 업데이트하는 메서드
+    private void updateChartWithNewData(DataSnapshot dataSnapshot) {
+        // 차트 데이터 업데이트 로직 구현
+        // 데이터 파싱 및 차트 반영
+    }
+
 
     private void showImageDialog() {
         if (currentEntry == null || currentEntry.getImageUrl() == null || currentEntry.getImageUrl().isEmpty()) {
@@ -207,6 +214,7 @@ public class ViewDiaryActivity extends AppCompatActivity {
                 .centerInside()
                 .into(dialogImageView);
 
+        // Dismiss dialog when touching outside of it
         imageDialog.findViewById(R.id.dialogImageContainer).setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_UP) {
                 imageDialog.dismiss();

@@ -37,6 +37,16 @@
 
         <activity android:name=".MyPageActivity" />
         <activity android:name=".TodoListActivity" />
+
+        <activity
+            android:name=".MonthlyStatActivity"
+            android:exported="true"> <!-- 혹은 false, 상황에 맞게 설정 -->
+            <intent-filter>
+                <action android:name="com.example.photothis.SOME_ACTION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".DiarySummaryActivity" />
     </application>
 
 </manifest>
