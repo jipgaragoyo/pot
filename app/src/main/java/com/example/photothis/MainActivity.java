@@ -208,7 +208,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(MainActivity.this, "다이어리가 존재하지 않습니다 m00 : " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "다이어리가 존재하지 않습니다. m00 : " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -244,6 +244,13 @@ public class MainActivity extends AppCompatActivity {
         todayButton.setText(dayFormat.format(Calendar.getInstance(Locale.KOREA).getTime()));
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // 화면이 다시 보일 때마다 달력을 업데이트
+        updateCalendar();
+    }
+
     private void fetchDiaryImages() {
         diaryRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -260,9 +267,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(MainActivity.this, "다이어리 이미지를 가져오는데 실패했습니다 m01 : " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "다이어리 이미지를 가져오는데 실패했습니다. m01 : " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 }
+
 
