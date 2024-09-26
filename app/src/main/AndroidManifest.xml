@@ -6,8 +6,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
-
-
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -19,18 +17,31 @@
         android:theme="@style/Theme.PhotoThis"
         tools:targetApi="31">
 
+        <!-- NaverLogin을 첫 화면으로 설정 -->
         <activity
-            android:name=".MainActivity"
+            android:name=".NaverLogin"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+
+        <activity android:name=".SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!-- MainActivity -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+        </activity>
+
         <activity android:name=".DiaryActivity" />
-        <!-- AndroidManifest.xml -->
         <activity android:name=".ViewDiaryActivity" />
         <activity android:name=".WriteDiaryActivity" />
         <activity android:name=".EditDiaryActivity"/>
@@ -40,12 +51,13 @@
 
         <activity
             android:name=".MonthlyStatActivity"
-            android:exported="true"> <!-- 혹은 false, 상황에 맞게 설정 -->
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.example.photothis.SOME_ACTION" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
         <activity android:name=".DiarySummaryActivity" />
     </application>
 

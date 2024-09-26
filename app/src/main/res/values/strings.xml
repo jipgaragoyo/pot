@@ -16,4 +16,8 @@
     <string name="register">등록</string>
     <string name="delete">삭제</string>
     <string name="add_task">추가하기</string>
+
+<!--    로그인-->
+    <string name="naver_client_id">xkBgoDz4dR1NEGQFeaEk</string> <!-- 실제 클라이언트 ID -->
+    <string name="naver_client_secret"> PPJfEEMcxI</string>  <!-- 실제 클라이언트 Secret -->
 </resources>
