@@ -38,7 +38,7 @@ public class NaverLogin extends AppCompatActivity {
             public void onSuccess() {
                 // 로그인 성공 시 액세스 토큰 가져오기
                 String accessToken = NaverIdLoginSDK.INSTANCE.getAccessToken();
-                textView.setText(accessToken);
+//                textView.setText(accessToken);
                 btnLogin.setVisibility(View.GONE); // 로그인 성공 후 버튼 숨기기
 
                 // MainActivity로 이동
